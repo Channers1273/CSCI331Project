@@ -1,2 +1,6 @@
-# CSCI331Project
-Kyle, Alvin, and Jordan's amazing project
+# Steam Achievement Comparer
+
+## Steps
+
+install the needed packages by running
+pip install -r requirements.txt
