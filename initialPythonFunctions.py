@@ -27,18 +27,6 @@ class SteamUser:
         self.recentGames = self.getRecentGames()
         self.achievements = {}
 
-        '''
-        for game in self.recentGames:
-            apiGameAchievements = steam.apps.get_user_achievements(self.steamID, self.recentGames[game]['appid'])
-            achievements = {}
-            for achievement in apiGameAchievements['playerstats']['achievements']:
-                displayName = getAchievementTitle(KEY, self.recentGames[game]['appid'], achievement['apiname'])
-                apiname = achievement['apiname']
-                rarity = getAchievementRarity(self.recentGames[game]['appid'], apiname)
-                # achievements[achievement[displayName]] = {'apiname': apiname, 'rarity': rarity}
-                self.achievements[displayName] = {'apiname': apiname, 'rarity': rarity}
-        '''
-
     def getUsername(self):
         user = steam.users.get_user_details(self.steamID)
         return user['player']['personaname']
@@ -85,12 +73,10 @@ def getAchievementInfo(steamID: str, appid: int):
     apiGameAchievements = steam.apps.get_user_achievements(steamID, appid)
     achievementDict = {}
     for achievement in apiGameAchievements['playerstats']['achievements']:
-        # print(achievement)
         apiname = achievement['apiname']
         displayName = getAchievementTitle(KEY, appid, apiname)
         achievementRarity = getAchievementRarity(appid, apiname)
         obtainStatus = achievement['achieved']
-        # print(displayName)
         achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus}
     return achievementDict
 
@@ -122,7 +108,6 @@ def describeGame(appid):
 
 if __name__ == '__main__':
     user = SteamUser(JordanSteamID) 
-    #user.listRecentGames()
     testInfo = getAchievementInfo(user.steamID, appIDBlasphemous)
     for k,v in testInfo.items():
         print(k,v)
