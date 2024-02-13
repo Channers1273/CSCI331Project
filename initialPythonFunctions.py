@@ -3,7 +3,8 @@ from decouple import config
 import requests
 import json
 
-
+#JORDANS TEST COMMENTS
+#YFBEJFOBVOWUEBVUEBBVUOWBVUOHWBDPVVHQEUHUB
 KyleSteamID = "76561198199245639"
 JordanSteamID = "76561198208256371"
 
@@ -15,7 +16,7 @@ appIDBlasphemous = 774361
 appIDTheBindingOfIsaacRebirth = 250900
 
 KEY = config("STEAM_API_KEY")
-steam = Steam(KEY)
+steam = Steam(KEY)                              #object that represents steam database
 
 class SteamUser:
 
@@ -45,7 +46,7 @@ class SteamUser:
     def getFriends(self):
 
         friendsList = steam.users.get_user_friends_list(self.steamID)
-        friends = {}
+        friends = {}                            #dictionary of friends with usernames as keys, id's as elements
         for friend in friendsList['friends']:
             name = friend['personaname']
             friends[name] = friend['steamid']
@@ -121,7 +122,7 @@ def describeGame(appid):
 
 if __name__ == '__main__':
     user = SteamUser(JordanSteamID) 
-    # user.listRecentGames()
+    #user.listRecentGames()
     testInfo = getAchievementInfo(user.steamID, appIDBlasphemous)
     for k,v in testInfo.items():
         print(k,v)
