@@ -4,8 +4,7 @@ import requests
 import json
 
 # This is a comment made by Kyle
-#JORDANS TEST COMMENTS
-#YFBEJFOBVOWUEBVUEBBVUOWBVUOHWBDPVVHQEUHUB
+#This is Jordans second attempt at adding a comment
 KyleSteamID = "76561198199245639"
 JordanSteamID = "76561198208256371"
 
