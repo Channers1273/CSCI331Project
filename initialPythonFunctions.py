@@ -3,6 +3,8 @@ from decouple import config
 import requests
 import json
 
+# This is a comment made by Kyle
+
 KyleSteamID = "76561198199245639"
 JordanSteamID = "76561198208256371"
 
