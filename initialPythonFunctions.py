@@ -61,7 +61,7 @@ class SteamUser:
         recentGames = {}
         for game in apiGames['games']:
             name = game['name']
-            recentGames[name] = {'appid': game['appid'], 'playtime': float(game['playtime_forever']/60)}
+            recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
         return recentGames
 
     def listRecentGames(self):
@@ -79,6 +79,10 @@ class SteamUser:
     def listAchievement(self, displayName):
         for achievement in self.achievements[displayName]:
             print(achievement)
+
+
+        
+
 
 
 def getAchievementInfo(steamID: str, appid: int):
@@ -120,9 +124,21 @@ def describeGame(appid):
     test = steam.apps.get_app_details(appid)
     print(test)
 
+
+#gets the profile playtime for the last 2 weeks in minutes
+def getGameTimeRecent(userid: int, appid: int):
+        games = steam.users.get_user_recently_played_games(userid)['games']
+        for g in games:
+            if g['appid'] == appid:
+                return g['playtime_2weeks']
+
+
+
 if __name__ == '__main__':
     user = SteamUser(JordanSteamID) 
-    #user.listRecentGames()
-    testInfo = getAchievementInfo(user.steamID, appIDBlasphemous)
-    for k,v in testInfo.items():
-        print(k,v)
+    user.listRecentGames()
+    print(getGameTimeRecent(user.steamID, appIDBlasphemous))
+    #print(steam.users.get_user_recently_played_games(76561198208256371))
+    #testInfo = getAchievementInfo(user.steamID, appIDBlasphemous)
+    #for k,v in testInfo.items():
+    #print(k,v)
