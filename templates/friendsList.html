@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title style="color:cornflowerblue" style="font-family: fantasy;">{{name}}'s Friend List</title>
+    <title>Friends List</title>
 </head>
     <body>
-
-
+        <h1  style="color:cornflowerblue" style="font-family: fantasy;">{{name}}'s Friend List</h1>
+        {% for item in friends %}
+            <p>{{item}}</p>
+        {% endfor %}
 
     </body>
 
