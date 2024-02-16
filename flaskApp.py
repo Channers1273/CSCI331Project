@@ -1,10 +1,25 @@
 from flask import Flask, redirect, render_template, url_for
+from initialPythonFunctions import *
 
 app = Flask(__name__)
 
+
 @app.route("/")
-def home():
-    return "Jordan can't code without VSCode <h4>WHAT A GOOBER</h4>"
+def index():
+    return render_template("welcome.html", name=YOU.username)
+
+@app.route("/friendsList")
+def friendsList():
+    flist = YOU.friendsList
+    return render_template("friendsList.html", name=YOU.username, friends=flist)
+
+
+
 
 if __name__ == '__main__':
+    print("Please enter your steam id")
+    id = JordanSteamID
+    YOU = SteamUser(id)
+
+
     app.run()

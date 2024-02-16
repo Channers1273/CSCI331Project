@@ -1,10 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Friends List</title>
+    <tite style="font-size: 30px; font-family:monospace; color: cornflowerblue; font-weight:bold;">{{name}}'s Friend List</tite>
 </head>
     <body>
-        <h1  style="color:cornflowerblue" style="font-family: fantasy;">{{name}}'s Friend List</h1>
+        <a href="/">
+            <h1 style="font-size: 20px; font-family:monospace; color: rgb(9, 198, 240); font-weight: normal;">Welcome Page</h1>
+        </a>
+        <br>
+        <br>
+
         {% for item in friends %}
             <p>{{item}}</p>
         {% endfor %}
