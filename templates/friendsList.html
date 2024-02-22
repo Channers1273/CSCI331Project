@@ -1,20 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <tite style="font-size: 30px; font-family:monospace; color: cornflowerblue; font-weight:bold;">{{name}}'s Friend List</tite>
-</head>
-    <body>
-        <a href="/">
-            <h1 style="font-size: 20px; font-family:monospace; color: rgb(9, 198, 240); font-weight: normal;">Welcome Page</h1>
-        </a>
-        <br>
-        <br>
+{% extends "base.html" %}
+{% block title %}{{name}}'s Friend List{% endblock %}
+{% block content %}
+    <!-- <a href="/">
+        <h1 style="font-size: 20px; font-family:monospace; color: rgb(9, 198, 240); font-weight: normal;">Welcome Page</h1>
+    </a>
+    <br>
+    <br> -->
 
-        {% for item in friends %}
-            <p>{{item}}</p>
-        {% endfor %}
-
-    </body>
-
-</html>
-
+    {% for item in friends %}
+        <p>{{item}}</p>
+    {% endfor %}
+{% endblock %}

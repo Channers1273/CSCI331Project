@@ -24,7 +24,7 @@ class SteamUser:
         self.steamID = steamID
         self.username = self.getUsername() 
         self.friendsList = self.getFriends()
-        self.recentGames = self.getRecentGames()
+        # self.recentGames = self.getRecentGames()
         self.achievements = {}
 
     def getUsername(self):
