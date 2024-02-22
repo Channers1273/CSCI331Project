@@ -5,8 +5,11 @@ import json
 
 # This is a comment made by Kyle
 #This is Jordans second attempt at adding a comment
-KyleSteamID = "76561198199245639"
+KyleSteamID = "76561198199245639" 
 JordanSteamID = "76561198208256371"
+AlvinSteamID = "76561198419880283"
+OtherAlvinSteamID = "76561199028603569"
+DylanSteamID = "76561198146107396"
 
 appIDTheFinals = 2073850
 appIDGodOfWar = 1593500
@@ -121,9 +124,12 @@ def getGameTimeRecent(userid: int, appid: int):
 
 
 if __name__ == '__main__':
-    user = SteamUser(JordanSteamID) 
-    user.listRecentGames()
-    print(getGameTimeRecent(user.steamID, appIDBlasphemous))
+    # user = SteamUser(AlvinSteamID) 
+    # user.listRecentGames()
+    # print(getGameTimeRecent(user.steamID, appIDBlasphemous))
+
+    apiGames = steam.users.get_user_recently_played_games(AlvinSteamID)
+    print(apiGames)
     #print(steam.users.get_user_recently_played_games(76561198208256371))
     #testInfo = getAchievementInfo(user.steamID, appIDBlasphemous)
     #for k,v in testInfo.items():

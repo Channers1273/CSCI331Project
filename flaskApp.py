@@ -13,9 +13,6 @@ def friendsList():
     flist = YOU.friendsList
     return render_template("friendsList.html", name=YOU.username, friends=flist)
 
-
-
-
 @app.route("/<name>")
 def user(name):
     return f"Hello {name}!"
@@ -25,9 +22,8 @@ def admin():
     return redirect(url_for("home"))
 
 if __name__ == '__main__':
-    print("Please enter your steam id")
-    id = JordanSteamID
+    # print("Please enter your steam id")
+    id = AlvinSteamID
     YOU = SteamUser(id)
-
 
     app.run()
