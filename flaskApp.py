@@ -33,6 +33,31 @@ def login():
     else:
         return render_template("login.html")    
 
+@app.route("/select", methods=["POST", "GET"])
+def select():
+    
+    if request.method == "POST":
+        game = request.form["game"]
+        # gn = getAppName(game)
+        opponent = str(request.form["opp"])
+        # return redirect(url_for("compare", gameid = game, oppid = str(opponent)))
+        return redirect(url_for("compare", gameID=game, oppid=opponent))
+    else:
+        return render_template("gameSelection.html")
+
+# @app.route("/<gameid><oppid>")
+# def compare(gameid, oppid):
+#     opp = SteamUser(oppid)
+#     return render_template("gameComparison.html", gamename = getAppName(gameid), opp = opp)
+
+# V this renders okay
+@app.route("/compare/<gameID>/<oppid>")
+def compare(gameID, oppid):
+    opp = SteamUser(oppid)
+    gamename = getAppName(gameID)
+    imgLin = getAppImage(gameID)
+    return render_template("gameComparison.html", opp = opp, gamename = gamename, image = imgLin)
+
 if __name__ == '__main__':
     # print("Please enter your steam id")
     # id = JordanSteamID

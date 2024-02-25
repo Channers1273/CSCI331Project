@@ -35,7 +35,6 @@ class SteamUser:
         return user['player']['personaname']
 
     def getFriends(self):
-
         friendsList = steam.users.get_user_friends_list(self.steamID)
         friends = {}                            #dictionary of friends with usernames as keys, id's as elements
         for friend in friendsList['friends']:
@@ -121,16 +120,19 @@ def getGameTimeRecent(userid: int, appid: int):
             if g['appid'] == appid:
                 return g['playtime_2weeks']
 
+#provided an appid returns the name of the game
+def getAppName(appid: int) -> str:
+    game = steam.apps.get_app_details(appid)
+    return game[str(appid)]['data']['name'] 
 
+def getAppImage(appid: int):
+    image = steam.apps.get_app_details(appid)
+    return image[str(appid)]['data']['header_image']
 
 if __name__ == '__main__':
-    # user = SteamUser(AlvinSteamID) 
+
+    print(getAppImage(appIDGodOfWar))
+
+    # user = SteamUser(DylanSteamID) 
     # user.listRecentGames()
     # print(getGameTimeRecent(user.steamID, appIDBlasphemous))
-
-    apiGames = steam.users.get_user_recently_played_games(AlvinSteamID)
-    print(apiGames)
-    #print(steam.users.get_user_recently_played_games(76561198208256371))
-    #testInfo = getAchievementInfo(user.steamID, appIDBlasphemous)
-    #for k,v in testInfo.items():
-    #print(k,v)
