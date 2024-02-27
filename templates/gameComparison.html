@@ -1,11 +1,15 @@
 {% extends "base.html" %}
-{% block title %} Compare {% endblock %}
+{% block title %} Compare: {{gamename}} {% endblock %}
 {% block content %}
 
-  <div style = "margin: auto; width: 50%; border: 3px solid green; padding: 10px;"> 
+  <div style = "margin: auto; width: 50%; border: 3px solid red; padding: 10px;"> 
     <img src={{image}} alt="Help">
   </div>
-  <p> You entered {{gamename}}</p>   
-  <p> Face off against {{opp.username}}
+  <p> <strong> Face off against {{opp.username}} </strong></p>
+  <br>
+  <br>
+  <br>
+  <img src = {{YOU.avatar}} alt = "Your Profile Icon">
+  <img src = {{opp.avatar}} alt = "Opponent's Profile Icon">
 
 {% endblock %}

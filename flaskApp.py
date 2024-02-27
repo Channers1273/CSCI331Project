@@ -56,7 +56,7 @@ def compare(gameID, oppid):
     opp = SteamUser(oppid)
     gamename = getAppName(gameID)
     imgLin = getAppImage(gameID)
-    return render_template("gameComparison.html", opp = opp, gamename = gamename, image = imgLin)
+    return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin)
 
 if __name__ == '__main__':
     # print("Please enter your steam id")

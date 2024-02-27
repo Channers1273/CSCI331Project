@@ -29,6 +29,7 @@ class SteamUser:
         self.friendsList = self.getFriends()
         # self.recentGames = self.getRecentGames()
         self.achievements = {}
+        self.avatar = self.getAvatar()
 
     def getUsername(self):
         user = steam.users.get_user_details(self.steamID)
@@ -70,6 +71,10 @@ class SteamUser:
         for achievement in self.achievements[displayName]:
             print(achievement)
 
+    def getAvatar(self):
+        data = steam.users.get_user_details(self.steamID)
+        return data['player']['avatar']
+
 
         
 
@@ -109,7 +114,7 @@ def getAchievementRarity(appid, apiname):
     return None
 
 def describeGame(appid):
-    test = steam.apps.get_app_details(appid)
+    test = steam.aapps.get_app_details(appid)
     print(test)
 
 
@@ -131,8 +136,8 @@ def getAppImage(appid: int):
 
 if __name__ == '__main__':
 
-    print(getAppImage(appIDGodOfWar))
-
+    user = steam.users.get_user_details(KyleSteamID)
+    print(user)
     # user = SteamUser(DylanSteamID) 
     # user.listRecentGames()
     # print(getGameTimeRecent(user.steamID, appIDBlasphemous))
