@@ -8,15 +8,21 @@
         <h1 style="font-size: 20px; font-family:monospace; color: rgb(9, 198, 240); font-weight: normal;">Friends List</h1>
     </a> -->
 
-    <div class="container">
-        <div class="recent-section">
-            <h3>Recent Games</h3>
-            <!-- Recent games API -->
-        </div>
-
-        <div class="recent-section">
-            <h3>Recent Achievements</h3>
-            <!-- Recent achievements API -->
-        </div>
+    <div class="recent-section">
+        <h3>Recent Games</h3>
+        <!-- Recent games API -->
+        <!-- {{YOU.recentGames}} -->
+        {% for k in YOU.recentGames %}
+            <p>{{k}}</p>
+        {% endfor %}
     </div>
+
+    <div class="recent-section">
+        <h3>Recent Achievements</h3>
+        <!-- Recent achievements API -->
+        <!-- {% for item in listGame %}
+        <p>{{item}}</p>
+        {% endfor %} -->
+    </div>
+
 {% endblock %}
