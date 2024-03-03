@@ -12,7 +12,7 @@ def index():
     # Error handling to be done for invalid Steam ID
     if YOU:
         # rgames = YOU.listRecentGames
-        return render_template("welcome.html", YOU=YOU, name=YOU.username)
+        return render_template("welcome.html", YOU=YOU, name=YOU.username, getAppImage=getAppImage)
     else:
         return redirect(url_for("login"))
 
