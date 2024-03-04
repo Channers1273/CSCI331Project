@@ -11,9 +11,15 @@
     <div class="recent-section">
         <h3>Recent Games</h3>
         <!-- Recent games API -->
-        <!-- {{YOU.recentGames}} -->
-        {% for k in YOU.recentGames %}
-            <p>{{k}}</p>
+        {% for k, v in YOU.recentGames.items() %}
+        <div>
+            {% set app_image_url = getAppImage(v['appid']) %}
+            <img src="{{ app_image_url }}" alt="{{ k }} Image">
+            <p>Game Name: {{ k }}</p>
+            <p>Playtime (Forever): {{ "{:.2f}".format(v['playtime_forever']) }} hours</p>
+            <p>Playtime (2 Weeks): {{ "{:.2f}".format(v['playtime_2weeks']) }} hours</p>
+        </div>
+        <hr>
         {% endfor %}
     </div>
 
