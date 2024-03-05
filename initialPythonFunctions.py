@@ -33,6 +33,7 @@ class SteamUser:
         self.avatar = self.getAvatar()
         self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
                                                         # sized dict of friend name/id pairs just like friendsList
+        self.DDGames = self.getDropdownGames()
 
     def getUsername(self):
         user = steam.users.get_user_details(self.steamID)
@@ -84,15 +85,30 @@ class SteamUser:
         num = 5
         if len(self.friendsList) < 5:
             num = len(self.friendsList)
-        temp = self.friendsList
+        temp = self.friendsList.copy()
         newDict = {}
         for x in range(num):
             element = random.choice(list(temp))
             if element not in [newDict.keys()]:
                 newDict[element] = temp[element]
                 temp.pop(element)
-
         return newDict
+    
+    def getDropdownGames(self) -> dict:
+        if not self.recentGames:
+            return {}
+        num = 5
+        if len(self.recentGames) < 5:
+            num = len(self.recentGames)
+        temp = self.recentGames.copy()
+        newDict = {}
+        for x in range(num):
+            element = random.choice(list(temp))
+            if element not in [newDict.keys()]:
+                newDict[element] = temp[element]['appid']
+                temp.pop(element)
+        return newDict
+                
                 
 
 

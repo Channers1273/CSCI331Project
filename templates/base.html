@@ -48,11 +48,9 @@
                             <div class="style2">Your Stats</div>
                             </a>
                             <div class="customSubMenu">
-                                <div class="subLink"><a href="#"><i class="fa-solid fa-gamepad"></i> Game1</a></div>
-                                <div class="subLink"><a href="#"><i class="fa-solid fa-gamepad"></i> Game2</a></div>
-                                <div class="subLink"><a href="#"><i class="fa-solid fa-gamepad"></i> Game3</a></div>
-                                <div class="subLink"><a href="#"><i class="fa-solid fa-gamepad"></i> Game4</a></div>
-                                <div class="subLink"><a href="#"><i class="fa-solid fa-gamepad"></i> Game5</a></div>
+                                {% for key, value in YOU.DDGames.items() %}
+                                <div class="subLink"><a href="#"><i class="fa-solid fa-gamepad"></i> {{key}}</a></div>
+                                {% endfor %}
                             </div>
                         </li>
 
@@ -62,11 +60,9 @@
                             <div class="style2">Stats Around</div>
                             </a>
                             <div class="customSubMenu">
-                            <div class="subLink"><a href="#"><i class="fa-solid fa-person-rifle"></i> Friend1</a></div>
-                            <div class="subLink"><a href="#"><i class="fa-solid fa-person-rifle"></i> Friend2</a></div>
-                            <div class="subLink"><a href="#"><i class="fa-solid fa-person-rifle"></i> Friend3</a></div>
-                            <div class="subLink"><a href="#"><i class="fa-solid fa-person-rifle"></i> Friend4</a></div>
-                            <div class="subLink"><a href="#"><i class="fa-solid fa-person-rifle"></i> Friend5</a></div>
+                            {% for key, value in YOU.DDFriends.items() %}
+                            <div class="subLink"><a href="{{ url_for('friend', friendID=value) }}"><i class="fa-solid fa-person-rifle"></i> {{key}}</a></div>
+                            {% endfor %}
                             </div>
                         </li>
 

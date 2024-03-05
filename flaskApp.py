@@ -19,12 +19,12 @@ def index():
 @app.route("/friendsList")
 def friendsList():
     flist = YOU.friendsList
-    return render_template("friendsList.html", name=YOU.username, friends=flist)
+    return render_template("friendsList.html", name=YOU.username, friends=flist, YOU=YOU)
 
 @app.route("/friend/ID=<friendID>")
 def friend(friendID):
     FRIEND = friendUser(friendID)
-    return render_template("friend.html", FRIEND=FRIEND, getAppImage=getAppImage)
+    return render_template("friend.html", FRIEND=FRIEND, getAppImage=getAppImage, YOU=YOU)
 
 
 @app.route("/login", methods=["POST", "GET"])
@@ -50,7 +50,7 @@ def select():
         # return redirect(url_for("compare", gameid = game, oppid = str(opponent)))
         return redirect(url_for("compare", gameID=game, oppid=opponent))
     else:
-        return render_template("gameSelection.html")
+        return render_template("gameSelection.html", YOU=YOU)
 
 # @app.route("/<gameid><oppid>")
 # def compare(gameid, oppid):
