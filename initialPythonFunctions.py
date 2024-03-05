@@ -18,6 +18,7 @@ appIDPalworld = 1623730
 appIDLethalCompany = 1966720
 appIDBlasphemous = 774361
 appIDTheBindingOfIsaacRebirth = 250900
+appIDWeWereHere = 582500
 
 KEY = config("STEAM_API_KEY")
 steam = Steam(KEY)                              #object that represents steam database
@@ -25,12 +26,13 @@ steam = Steam(KEY)                              #object that represents steam da
 class SteamUser:
 
     def __init__(self, steamID: str):
+        user = steam.users.get_user_details(steamID)
         self.steamID = steamID
-        self.username = self.getUsername() 
+        self.username = user['player']['personaname']
         self.friendsList = self.getFriends()
         self.recentGames = self.getRecentGames()
         self.achievements = {}
-        self.avatar = self.getAvatar()
+        self.avatar = user['player']['avatarmedium']
         self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
                                                         # sized dict of friend name/id pairs just like friendsList
         self.DDGames = self.getDropdownGames()
@@ -75,6 +77,7 @@ class SteamUser:
         for achievement in self.achievements[displayName]:
             print(achievement)
 
+    # Not really needed anymore
     def getAvatar(self):
         data = steam.users.get_user_details(self.steamID)
         return data['player']['avatar']
@@ -138,6 +141,7 @@ class friendUser:
 def getAchievementInfo(steamID: str, appid: int):
     apiGameAchievements = steam.apps.get_user_achievements(steamID, appid)
     achievementDict = {}
+    # print(apiGameAchievements)
     for achievement in apiGameAchievements['playerstats']['achievements']:
         apiname = achievement['apiname']
         displayName = getAchievementTitle(KEY, appid, apiname)
@@ -168,8 +172,11 @@ def getAchievementRarity(appid, apiname):
                 return achievement['percent']
     return None
 
+def getAcheivementsPerGame(steamID: str, appid: int):
+    pass
+
 def describeGame(appid):
-    test = steam.aapps.get_app_details(appid)
+    test = steam.apps.get_app_details(appid)
     print(test)
 
 
@@ -193,6 +200,3 @@ if __name__ == '__main__':
 
     user = steam.users.get_user_details(KyleSteamID)
     print(user)
-    # user = SteamUser(DylanSteamID) 
-    # user.listRecentGames()
-    # print(getGameTimeRecent(user.steamID, appIDBlasphemous))

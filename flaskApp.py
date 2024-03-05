@@ -52,18 +52,26 @@ def select():
     else:
         return render_template("gameSelection.html", YOU=YOU)
 
-# @app.route("/<gameid><oppid>")
-# def compare(gameid, oppid):
-#     opp = SteamUser(oppid)
-#     return render_template("gameComparison.html", gamename = getAppName(gameid), opp = opp)
-
-# V this renders okay
 @app.route("/compare/<gameID>/<oppid>")
 def compare(gameID, oppid):
+
     opp = SteamUser(oppid)
     gamename = getAppName(gameID)
     imgLin = getAppImage(gameID)
-    return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin)
+    yourAchievements = getAchievementInfo(YOU.steamID, gameID)
+    oppAchievements = getAchievementInfo(opp.steamID, gameID)
+    YNumAchievements = 0
+    ONumAchievements = 0
+
+    for A in yourAchievements:
+        if yourAchievements[A]['obtained'] == 1:
+            YNumAchievements += 1
+
+    for A in oppAchievements:
+        if yourAchievements[A]['obtained'] == 1:
+            ONumAchievements += 1
+    
+    return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements)
 
 if __name__ == '__main__':
     # print("Please enter your steam id")
