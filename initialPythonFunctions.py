@@ -76,6 +76,11 @@ class SteamUser:
         return data['player']['avatar']
 
 
+class friendUser:
+    def __init__(self, id):
+        self.steamID = id
+        self.userDet = steam.users.get_user_details(self.steamID)
+        self.avatar = self.userDet['player']['avatar']
         
 
 

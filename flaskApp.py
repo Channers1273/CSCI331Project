@@ -21,6 +21,12 @@ def friendsList():
     flist = YOU.friendsList
     return render_template("friendsList.html", name=YOU.username, friends=flist)
 
+@app.route("/friend/ID=<friendID>name=<friendName>")
+def friend(friendName, friendID):
+    FRIEND = friendUser(friendID)
+    return render_template("friend.html", friendName=friendName, friendID=friendID)
+
+
 @app.route("/login", methods=["POST", "GET"])
 def login():
     # declare YOU as global variable for storing the input value
