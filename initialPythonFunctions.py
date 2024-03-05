@@ -2,6 +2,7 @@ from steam import Steam
 from decouple import config
 import requests
 import json
+import random
 
 # This is a comment made by Kyle
 #This is Jordans second attempt at adding a comment
@@ -32,6 +33,8 @@ class SteamUser:
         self.recentGames = self.getRecentGames()
         self.achievements = {}
         self.avatar = user['player']['avatarmedium']
+        self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
+                                                        # sized dict of friend name/id pairs just like friendsList
 
     def getUsername(self):
         user = steam.users.get_user_details(self.steamID)
@@ -77,8 +80,44 @@ class SteamUser:
     def getAvatar(self):
         data = steam.users.get_user_details(self.steamID)
         return data['player']['avatar']
+    
+    def getDropdownFriends(self) -> dict:
+        if not self.friendsList:
+            return {}
+        num = 5
+        if len(self.friendsList) < 5:
+            num = len(self.friendsList)
+        temp = self.friendsList
+        newDict = {}
+        for x in range(num):
+            element = random.choice(list(temp))
+            if element not in [newDict.keys()]:
+                newDict[element] = temp[element]
+                temp.pop(element)
+
+        return newDict
+                
 
 
+
+
+class friendUser:
+    def __init__(self, id):
+        self.steamID = id
+        self.userDet = steam.users.get_user_details(self.steamID)
+        self.avatar = self.userDet['player']['avatar']
+        self.username = self.userDet['player']['personaname']
+        self.recentGames = self.getRecentGames()
+
+
+    def getRecentGames(self):
+        apiGames = steam.users.get_user_recently_played_games(self.steamID)
+        recentGames = {}
+        if 'games' in apiGames.keys():
+            for game in apiGames['games']:
+                name = game['name']
+                recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
+        return recentGames
         
 
 

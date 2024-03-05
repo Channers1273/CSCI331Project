@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}{{friendName}}'s Friend Page{% endblock %}
+{% block content %}
+
+<img src="{{FRIEND.avatar}}" alt="{{FRIEND.username}}'s avatar" style="width:150px">
+<h1>{{FRIEND.username}}</h1>
+<br>
+<p>Steam ID = {{FRIEND.steamID}}</p>
+<br><hr>
+<h2>{{FRIEND.username}}'s Recently Played Games</h2>
+<br>
+    {% if not FRIEND.recentGames.items() %}
+        <p>This user has no recently played games.</p>
+    {% endif %}
+
+    {% for name, data in FRIEND.recentGames.items() %}
+        {% set image = getAppImage(data['appid']) %}
+        <img src="{{ image }}" alt="{{name}} Image" style="width:50%">
+        <p>{{name}}</p>
+        <p>Playtime (Forever): {{ "{:.2f}".format(data['playtime_forever']) }} hours</p>
+        <p>Playtime (2 Weeks): {{ "{:.2f}".format(data['playtime_2weeks']) }} hours</p>
+        <br><br>
+    {% endfor %}
+
+{% endblock %}
