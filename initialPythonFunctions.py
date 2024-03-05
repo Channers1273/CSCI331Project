@@ -81,6 +81,18 @@ class friendUser:
         self.steamID = id
         self.userDet = steam.users.get_user_details(self.steamID)
         self.avatar = self.userDet['player']['avatar']
+        self.username = self.userDet['player']['personaname']
+        self.recentGames = self.getRecentGames()
+
+
+    def getRecentGames(self):
+        apiGames = steam.users.get_user_recently_played_games(self.steamID)
+        recentGames = {}
+        if 'games' in apiGames.keys():
+            for game in apiGames['games']:
+                name = game['name']
+                recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
+        return recentGames
         
 
 
