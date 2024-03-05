@@ -2,6 +2,7 @@ from steam import Steam
 from decouple import config
 import requests
 import json
+import random
 
 # This is a comment made by Kyle
 #This is Jordans second attempt at adding a comment
@@ -30,6 +31,8 @@ class SteamUser:
         self.recentGames = self.getRecentGames()
         self.achievements = {}
         self.avatar = self.getAvatar()
+        self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
+                                                        # sized dict of friend name/id pairs just like friendsList
 
     def getUsername(self):
         user = steam.users.get_user_details(self.steamID)
@@ -74,6 +77,25 @@ class SteamUser:
     def getAvatar(self):
         data = steam.users.get_user_details(self.steamID)
         return data['player']['avatar']
+    
+    def getDropdownFriends(self) -> dict:
+        if not self.friendsList:
+            return {}
+        num = 5
+        if len(self.friendsList) < 5:
+            num = len(self.friendsList)
+        temp = self.friendsList
+        newDict = {}
+        for x in range(num):
+            element = random.choice(list(temp))
+            if element not in [newDict.keys()]:
+                newDict[element] = temp[element]
+                temp.pop(element)
+
+        return newDict
+                
+
+
 
 
 class friendUser:
