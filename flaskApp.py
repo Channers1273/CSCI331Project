@@ -26,6 +26,10 @@ def friend(friendID):
     FRIEND = friendUser(friendID)
     return render_template("friend.html", FRIEND=FRIEND, getAppImage=getAppImage, YOU=YOU)
 
+@app.route("/game/name=<gameName>ID=<gameID>")
+def game(gameID, gameName):
+    return render_template("game.html", gameName=gameName, gameID=gameID, getAppImage=getAppImage, YOU=YOU)
+
 
 @app.route("/login", methods=["POST", "GET"])
 def login():

@@ -49,7 +49,7 @@
                             </a>
                             <div class="customSubMenu">
                                 {% for key, value in YOU.DDGames.items() %}
-                                <div class="subLink"><a href="#"><i class="fa-solid fa-gamepad"></i> {{key}}</a></div>
+                                <div class="subLink"><a href="{{ url_for('game',gameName=key, gameID=value) }}"><i class="fa-solid fa-gamepad"></i> {{key}}</a></div>
                                 {% endfor %}
                             </div>
                         </li>
