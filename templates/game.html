@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{gameName}} Page{% endblock %}
+{% block content %}
+
+{% set gameImage = getAppImage(gameID) %}
+<img src="{{gameImage}}" alt="{{gameName}} Image" style="width:500px">
+<h1>{{gameName}}</h1>
+<hr>
+<h2>Playtime</h2>
+<br>
+<h5>Recent: {{ '%0.2f'|format(YOU.recentGames[gameName]['playtime_2weeks']) }} hours</h5>
+<h5>All time: {{ '%0.2f'|format(YOU.recentGames[gameName]['playtime_forever']) }} hours</h5>
+
+{% endblock %}
