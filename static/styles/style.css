@@ -4,9 +4,10 @@
   }
 
 #bg {
-    background: url('/static/bg1.png') repeat;
+    background: url('/static/bg1.png') repeat-y;
     background-size: cover;
     color: white;
+    overflow: auto; /* overflow to keep it at the back upon scrolling*/
 }
 
 .style1 {
