@@ -124,3 +124,23 @@ a>.style1 {
 .recent-section {
     margin-top: 20px;
 }
+
+
+.containerKYLE{
+  margin: 0 auto;
+  padding: 20px;
+  height: 500px;
+  outline: solid 1px black;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.usercompinfo {
+    
+}
+
+.gameimage {
+  margin: 0 auto;
+}

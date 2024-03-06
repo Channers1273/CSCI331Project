@@ -2,21 +2,21 @@
 {% block title %} Compare: {{gamename}} {% endblock %}
 {% block content %}
 
-  <div style = "margin: auto; width: 50%; padding: 10px;"> 
-    <img src={{image}} alt="Help">
+  <div class="containerKYLE">
+    <div class="gameimage"> 
+      <img src={{image}} alt="Help">
+    </div>
+    <div><p> <strong> Face off against {{opp.username}} </strong></p></div>
   </div>
-  <p> <strong> Face off against {{opp.username}} </strong></p>
+  
+  <br>
 
-  <p> You have {{YA}} completed achievements in {{gamename}} </p>
-  <br>
-  <p> {{opp.username}} has {{OA}} completed achievements in {{gamename}} </p>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <img src = {{YOU.avatar}} alt = "Your Profile Icon">
-  <br>
-  <img src = {{opp.avatar}} alt = "Opponent's Profile Icon">
+  <div class="containerKYLE">
+    <img src = {{YOU.avatar}} alt = "Your Profile Icon">
+    <p> You have <strong>{{YA}}</strong>completed achievements in {{gamename}} </p>
+
+    <img src = {{opp.avatar}} alt = "Opponent's Profile Icon">
+    <p> {{opp.username}} has <strong>{{OA}}</strong> completed achievements in {{gamename}} </p>
+  </div>
 
 {% endblock %}

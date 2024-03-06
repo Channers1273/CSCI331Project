@@ -55,9 +55,10 @@ def select():
 @app.route("/compare/<gameID>/<oppid>")
 def compare(gameID, oppid):
 
-    opp = SteamUser(oppid)
-    gamename = getAppName(gameID)
-    imgLin = getAppImage(gameID)
+    opp = friendUser(oppid)
+    game = steam.apps.get_app_details(gameID)
+    gamename = game[str(gameID)]['data']['name']
+    imgLin = game[str(gameID)]['data']['header_image']
     yourAchievements = getAchievementInfo(YOU.steamID, gameID)
     oppAchievements = getAchievementInfo(opp.steamID, gameID)
     YNumAchievements = 0
@@ -68,7 +69,7 @@ def compare(gameID, oppid):
             YNumAchievements += 1
 
     for A in oppAchievements:
-        if yourAchievements[A]['obtained'] == 1:
+        if oppAchievements[A]['obtained'] == 1:
             ONumAchievements += 1
     
     return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements)
