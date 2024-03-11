@@ -196,37 +196,17 @@ def getAppImage(appid: int):
     image = steam.apps.get_app_details(appid)
     return image[str(appid)]['data']['header_image']
 
+def getRarestAchievement(Achievements: dict) -> dict:
+    k = ''
+    rarest = 101 
+    for key, value in Achievements.items():
+        if value['rarity'] > rarest:
+            rarest = value['rarity']
+            k = key
+    print(rarest)
+        
+
 if __name__ == '__main__':
-
-    person = SteamUser(KyleSteamID)
-
-    opp = friendUser(DylanSteamID)
-    gameID = appIDGodOfWar
-    # game = steam.apps.get_app_details(appIDGodOfWar)
-    # gamename = game[str(gameID)]['data']['name']
-    # imgLin = game[str(gameID)]['data']['header_image']
-    yourAchievements = getAchievementInfo(person.steamID, gameID)
-    oppAchievements = getAchievementInfo(opp.steamID, gameID)
-    # print(yourAchievements)
-    print('\n')
-    print('*' * 8)
-    '''
-    for A in yourAchievements:
-        if yourAchievements[A]['obtained'] == 1:
-            print(A)
-
-    '''
-    YNumAchievements = 0
-    ONumAchievements = 0
-
-    for A in yourAchievements:
-        if yourAchievements[A]['obtained'] == 1:
-            YNumAchievements += 1
-
-    for A in oppAchievements:
-        if oppAchievements[A]['obtained'] == 1:
-            ONumAchievements += 1
-    print(YNumAchievements)
-    print(ONumAchievements)
-    # user = steam.users.get_user_details(KyleSteamID)
-    # print(user)
+    test = {}
+    test['apple'] = 'peep'
+    getRarestAchievement(test)
