@@ -12,7 +12,11 @@ def index():
     # Error handling to be done for invalid Steam ID
     if YOU:
         # rgames = YOU.listRecentGames
-        return render_template("welcome.html", YOU=YOU, name=YOU.username, getAppImage=getAppImage)
+        try:
+            return render_template("welcome.html", YOU=YOU, name=YOU.username, getAppImage=getAppImage)
+        except Exception as e:
+            print("Error:", e)
+            return redirect(url_for("login"))
     else:
         return redirect(url_for("login"))
 
@@ -39,8 +43,12 @@ def login():
     # post method is set in login.html
     if request.method == "POST":
         user_id = request.form["sid"]
-        YOU = SteamUser(user_id)
-        return redirect(url_for("index"))
+        try:
+            YOU = SteamUser(user_id)
+            return redirect(url_for("index"))
+        except Exception as e:
+            print("Error:", e)
+            return render_template("login.html")
     else:
         return render_template("login.html")    
 
