@@ -15,7 +15,7 @@ def index():
         try:
             return render_template("welcome.html", YOU=YOU, name=YOU.username, getAppImage=getAppImage)
         except Exception as e:
-            print("Error:", e)
+            print("Error in index():", e)
             return redirect(url_for("login"))
     else:
         return redirect(url_for("login"))
@@ -47,7 +47,7 @@ def login():
             YOU = SteamUser(user_id)
             return redirect(url_for("index"))
         except Exception as e:
-            print("Error:", e)
+            print("Error in login():", e)
             return render_template("login.html")
     else:
         return render_template("login.html")    
