@@ -31,7 +31,7 @@ class SteamUser:
         self.username = user['player']['personaname']
         self.friendsList = self.getFriends()
         self.recentGames = self.getRecentGames()
-        self.achievements = {}
+        self.achievements = self.getRecentAchievements()
         self.avatar = user['player']['avatarfull']
         self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
                                                         # sized dict of friend name/id pairs just like friendsList
@@ -56,10 +56,18 @@ class SteamUser:
     def getRecentGames(self):
         apiGames = steam.users.get_user_recently_played_games(self.steamID)
         recentGames = {}
-        for game in apiGames['games']:
+        for i, game in enumerate(apiGames['games']):
+        # Limit to 5 games
+            if i >= 5:
+                break
             name = game['name']
             recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
         return recentGames
+        # original
+        # for game in apiGames['games']:
+        #     name = game['name']
+        #     recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
+        # return recentGames
 
     def listRecentGames(self):
         for game in self.recentGames:
@@ -76,6 +84,18 @@ class SteamUser:
     def listAchievement(self, displayName):
         for achievement in self.achievements[displayName]:
             print(achievement)
+
+    def getRecentAchievements(self):
+        recentAchievements = {}
+        # Limit to 1 recent games to save loading time (2 sometimes timeout...)
+        # Comment out the for loop to enhance performance
+        for game_name, game_info in list(self.recentGames.items())[:1]:
+            appid = game_info['appid']
+            # Fetch all recent achievements for the game before calling api
+            all_achievements = getAchievementInfo(self.steamID, appid)
+            # Limit to 5 recent achievements
+            recentAchievements[game_name] = dict(list(all_achievements.items())[:5])
+        return recentAchievements
 
     # Not really needed anymore
     def getAvatar(self):
