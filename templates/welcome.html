@@ -25,10 +25,14 @@
 
     <div class="recent-section">
         <h3>Recent Achievements</h3>
-        <!-- Recent achievements API -->
-        <!-- {% for item in listGame %}
-        <p>{{item}}</p>
-        {% endfor %} -->
+        {% for k, achievements in YOU.achievements.items() %}
+        <h4>{{ k }}</h4>
+        <ul>
+            {% for achievement_name, achievement_info in achievements.items() %}
+            <li>{{ achievement_name }} - Rarity: {{ achievement_info['rarity'] }}%</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
     </div>
 
 {% endblock %}

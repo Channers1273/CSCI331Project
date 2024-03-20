@@ -11,6 +11,7 @@ JordanSteamID = "76561198208256371"
 AlvinSteamID = "76561198419880283"
 OtherAlvinSteamID = "76561199028603569"
 DylanSteamID = "76561198146107396"
+englishID = "en"
 
 appIDTheFinals = 2073850
 appIDGodOfWar = 1593500
@@ -31,7 +32,7 @@ class SteamUser:
         self.username = user['player']['personaname']
         self.friendsList = self.getFriends()
         self.recentGames = self.getRecentGames()
-        self.achievements = {}
+        self.achievements = self.getRecentAchievements()
         self.avatar = user['player']['avatarfull']
         self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
                                                         # sized dict of friend name/id pairs just like friendsList
@@ -56,10 +57,18 @@ class SteamUser:
     def getRecentGames(self):
         apiGames = steam.users.get_user_recently_played_games(self.steamID)
         recentGames = {}
-        for game in apiGames['games']:
+        for i, game in enumerate(apiGames['games']):
+        # Limit to 5 games
+            if i >= 5:
+                break
             name = game['name']
             recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
         return recentGames
+        # original
+        # for game in apiGames['games']:
+        #     name = game['name']
+        #     recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
+        # return recentGames
 
     def listRecentGames(self):
         for game in self.recentGames:
@@ -76,6 +85,18 @@ class SteamUser:
     def listAchievement(self, displayName):
         for achievement in self.achievements[displayName]:
             print(achievement)
+
+    def getRecentAchievements(self):
+        recentAchievements = {}
+        # Limit to 1 recent games to save loading time (2 sometimes timeout...)
+        # Comment out the for loop to enhance performance
+        for game_name, game_info in list(self.recentGames.items())[:1]:
+            appid = game_info['appid']
+            # Fetch all recent achievements for the game before calling api
+            all_achievements = getAchievementInfo(self.steamID, appid)
+            # Limit to 5 recent achievements
+            recentAchievements[game_name] = dict(list(all_achievements.items())[:5])
+        return recentAchievements
 
     # Not really needed anymore
     def getAvatar(self):
@@ -139,15 +160,18 @@ class friendUser:
 
 
 def getAchievementInfo(steamID: str, appid: int):
-    apiGameAchievements = steam.apps.get_user_achievements(steamID, appid)
     achievementDict = {}
+    url = f"https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid={appid}&key={KEY}&steamid={steamID}&l=en"
+    response = requests.get(url)
     # print(apiGameAchievements)
-    for achievement in apiGameAchievements['playerstats']['achievements']:
-        apiname = achievement['apiname']
-        displayName = getAchievementTitle(KEY, appid, apiname)
-        achievementRarity = getAchievementRarity(appid, apiname)
-        obtainStatus = achievement['achieved']
-        achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus}
+    if response.status_code == 200:
+        apiGameAchievements = response.json()
+        for achievement in apiGameAchievements['playerstats']['achievements']:
+            apiname = achievement['apiname']
+            displayName = achievement['name']
+            achievementRarity = getAchievementRarity(appid, apiname)
+            obtainStatus = achievement['achieved']
+            achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus}
     return achievementDict
 
 def getAchievementTitle(apikey, appid, apiname) -> str:
