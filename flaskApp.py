@@ -63,11 +63,30 @@ def compare(gameID, oppid):
     game = steam.apps.get_app_details(gameID)
     gamename = game[str(gameID)]['data']['name']
     imgLin = game[str(gameID)]['data']['header_image']
-    yourAchievements = getAchievementInfo(YOU.steamID, gameID)
-    oppAchievements = getAchievementInfo(opp.steamID, gameID)
-    YNumAchievements = 0
-    ONumAchievements = 0
+    yourAchievementData = getAchievementInfo(YOU.steamID, gameID)
+    yourAchievements = {}
 
+    for A in yourAchievementData:
+        if yourAchievementData[A]['obtained'] == 1:
+            yourAchievements[A] = yourAchievementData[A]
+
+    oppAchievementData = getAchievementInfo(opp.steamID, gameID)
+    # oppAchievements = { k:v for (k,v) in oppAchievementData if oppAchievementData[k]['obtained'] == 1}
+
+    oppAchievements = {}
+    for A in oppAchievementData:
+        if oppAchievementData[A]['obtained'] == 1:
+            oppAchievements[A] = oppAchievementData[A]
+
+    YNumAchievements = len(yourAchievements)
+    ONumAchievements = len(oppAchievements)
+
+    # print('*' * 7)
+    # print(yourAchievements) 
+    # print('*' * 7)
+    # print(oppAchievements) 
+
+    '''
     for A in yourAchievements:
         if yourAchievements[A]['obtained'] == 1:
             YNumAchievements += 1
@@ -75,6 +94,17 @@ def compare(gameID, oppid):
     for A in oppAchievements:
         if oppAchievements[A]['obtained'] == 1:
             ONumAchievements += 1
+    '''
+
+    YRarestAchievement = getRarestAchievement(yourAchievements)
+    ORarestAchievement = getRarestAchievement(oppAchievements)
+
+    YRareAch = YRarestAchievement.keys()
+    print(YRareAch)
+    ORareAch = ORarestAchievement.keys()
+    print(ORareAch)
+    # YRareAchRarity = YRarestAchievement[] 
+    # ORareAchRarity = ORarestAchievement[]
     
     return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements)
 

@@ -199,14 +199,25 @@ def getAppImage(appid: int):
 def getRarestAchievement(Achievements: dict) -> dict:
     k = ''
     rarest = 101 
-    for key, value in Achievements.items():
-        if value['rarity'] > rarest:
-            rarest = value['rarity']
-            k = key
-    print(rarest)
-        
+   
+    print('*' * 7)
+    print(Achievements)
+
+    for A in Achievements:
+        # print(key, value)
+        if Achievements[A]['rarity'] < rarest:
+            print(Achievements[A]['rarity'], "is less than", rarest)
+            rarest = Achievements[A]['rarity']
+            k = A
+    # return rarest
+    ans = {}
+    ans[k] = Achievements[k] 
+    return ans
 
 if __name__ == '__main__':
     test = {}
-    test['apple'] = 'peep'
-    getRarestAchievement(test)
+    test['apple'] = {}
+    test['apple']['rarity'] = 20
+    test2 = getRarestAchievement(test)
+    print(test2)
+    
