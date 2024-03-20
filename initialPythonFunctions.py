@@ -11,6 +11,7 @@ JordanSteamID = "76561198208256371"
 AlvinSteamID = "76561198419880283"
 OtherAlvinSteamID = "76561199028603569"
 DylanSteamID = "76561198146107396"
+englishID = "en"
 
 appIDTheFinals = 2073850
 appIDGodOfWar = 1593500
@@ -159,15 +160,18 @@ class friendUser:
 
 
 def getAchievementInfo(steamID: str, appid: int):
-    apiGameAchievements = steam.apps.get_user_achievements(steamID, appid)
     achievementDict = {}
+    url = f"https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid={appid}&key={KEY}&steamid={steamID}&l=en"
+    response = requests.get(url)
     # print(apiGameAchievements)
-    for achievement in apiGameAchievements['playerstats']['achievements']:
-        apiname = achievement['apiname']
-        displayName = getAchievementTitle(KEY, appid, apiname)
-        achievementRarity = getAchievementRarity(appid, apiname)
-        obtainStatus = achievement['achieved']
-        achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus}
+    if response.status_code == 200:
+        apiGameAchievements = response.json()
+        for achievement in apiGameAchievements['playerstats']['achievements']:
+            apiname = achievement['apiname']
+            displayName = achievement['name']
+            achievementRarity = getAchievementRarity(appid, apiname)
+            obtainStatus = achievement['achieved']
+            achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus}
     return achievementDict
 
 def getAchievementTitle(apikey, appid, apiname) -> str:
