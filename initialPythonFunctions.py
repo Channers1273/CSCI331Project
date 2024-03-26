@@ -57,12 +57,13 @@ class SteamUser:
     def getRecentGames(self):
         apiGames = steam.users.get_user_recently_played_games(self.steamID)
         recentGames = {}
-        for i, game in enumerate(apiGames['games']):
-        # Limit to 5 games
-            if i >= 5:
-                break
-            name = game['name']
-            recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
+        if 'games' in apiGames:
+            for i, game in enumerate(apiGames['games']):
+            # Limit to 5 games
+                if i >= 5:
+                    break
+                name = game['name']
+                recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
         return recentGames
         # original
         # for game in apiGames['games']:
