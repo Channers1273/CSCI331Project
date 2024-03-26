@@ -113,8 +113,15 @@ def compare(gameID, oppid):
     print(ORareAch)
     # YRareAchRarity = YRarestAchievement[] 
     # ORareAchRarity = ORarestAchievement[]
-    
-    return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements, YRareAchievement = YRareAch[0], ORareAchievement = ORareAch[0], YRareAchievementRarity = yourAchievements[YRareAch[0]]['rarity'], ORareAchievementRarity = oppAchievements[ORareAch[0]]['rarity'])
+
+
+
+
+    #old
+    #return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements, YRareAchievement = YRareAch[0], ORareAchievement = ORareAch[0], YRareAchievementRarity = yourAchievements[YRareAch[0]]['rarity'], ORareAchievementRarity = oppAchievements[ORareAch[0]]['rarity'])
+
+    #do check for YRareAchievement within html
+    return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements, YRareAchievement = YRareAch, ORareAchievement = ORareAch, YRareAchievementRarity = yourAchievements, ORareAchievementRarity = oppAchievements)
 
 if __name__ == '__main__':
     # print("Please enter your steam id")

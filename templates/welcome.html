@@ -21,6 +21,13 @@
         </div>
         <hr>
         {% endfor %}
+        {% if not YOU.recentGames %}
+            <div>
+                <p> Looks like you don't have any recently played games.</p>
+                <p> Any games played in the last 2 weeks will show up here.</p>
+                <hr>
+            </div>
+        {% endif %}
     </div>
 
     <div class="recent-section">
@@ -33,6 +40,11 @@
             {% endfor %}
         </ul>
         {% endfor %}
+        {% if not YOU.achievements %}
+        <div>
+            <p> Looks like you don't have any recent achievements.</p>
+        </div>
+        {% endif %}
     </div>
 
 {% endblock %}

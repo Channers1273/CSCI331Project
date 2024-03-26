@@ -167,12 +167,13 @@ def getAchievementInfo(steamID: str, appid: int):
     # print(apiGameAchievements)
     if response.status_code == 200:
         apiGameAchievements = response.json()
-        for achievement in apiGameAchievements['playerstats']['achievements']:
-            apiname = achievement['apiname']
-            displayName = achievement['name']
-            achievementRarity = getAchievementRarity(appid, apiname)
-            obtainStatus = achievement['achieved']
-            achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus}
+        if 'achievements' in apiGameAchievements['playerstats'].keys():
+            for achievement in apiGameAchievements['playerstats']['achievements']:
+                apiname = achievement['apiname']
+                displayName = achievement['name']
+                achievementRarity = getAchievementRarity(appid, apiname)
+                obtainStatus = achievement['achieved']
+                achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus}
     return achievementDict
 
 def getAchievementTitle(apikey, appid, apiname) -> str:
@@ -236,7 +237,10 @@ def getRarestAchievement(Achievements: dict) -> dict:
             k = A
     # return rarest
     ans = {}
-    ans[k] = Achievements[k] 
+
+
+    if k != '':
+        ans[k] = Achievements[k] 
     return ans
 
 if __name__ == '__main__':

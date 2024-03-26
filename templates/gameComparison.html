@@ -16,13 +16,20 @@
   <div class="containerKYLE">
     <img src = {{YOU.avatar}} alt = "Your Profile Icon">
     <p> You have <strong>{{YA}}</strong>completed achievements in {{gamename}} </p>
-    <p> Your rarest achievement is <strong> {{YRareAchievement}} </strong> with a rarity of {{YRareAchievementRarity}} </p>
-
+    {% if YRareAchievement %}
+      <p> Your rarest achievement is <strong> {{YRareAchievement[0]}} </strong> with a rarity of {{YRareAchievementRarity[YRareAchievement[0]]['rarity']}} </p>
+    {% else %}
+      <p> You have no rarest achievement. </p>
+    {% endif %}
   </div>
   <div class = "containerKYLE">
     <img src = {{opp.avatar}} alt = "Opponent's Profile Icon">
     <p> {{opp.username}} has <strong>{{OA}}</strong> completed achievements in {{gamename}} </p>
-    <p> {{opp.username}}'s rarest achievement is <strong> {{ORareAchievement}} </strong> with a rarity of {{ORareAchievementRarity}} </p>
+    {% if ORareAchievement %}
+      <p> {{opp.username}}'s rarest achievement is <strong> {{ORareAchievement[0]}} </strong> with a rarity of {{ORareAchievementRarity[ORareAchievement[0]]['rarity']}} </p>
+    {% else %}
+      <p> {{opp.username}} has no rarest achievement. </p>
+    {% endif %}
   </div>
 
 {% endblock %}
