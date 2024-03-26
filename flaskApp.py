@@ -107,14 +107,14 @@ def compare(gameID, oppid):
     YRarestAchievement = getRarestAchievement(yourAchievements)
     ORarestAchievement = getRarestAchievement(oppAchievements)
 
-    YRareAch = YRarestAchievement.keys()
+    YRareAch = list(YRarestAchievement.keys())
     print(YRareAch)
-    ORareAch = ORarestAchievement.keys()
+    ORareAch = list(ORarestAchievement.keys())
     print(ORareAch)
     # YRareAchRarity = YRarestAchievement[] 
     # ORareAchRarity = ORarestAchievement[]
     
-    return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements)
+    return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements, YRareAchievement = YRareAch[0], ORareAchievement = ORareAch[0], YRareAchievementRarity = yourAchievements[YRareAch[0]]['rarity'], ORareAchievementRarity = oppAchievements[ORareAch[0]]['rarity'])
 
 if __name__ == '__main__':
     # print("Please enter your steam id")

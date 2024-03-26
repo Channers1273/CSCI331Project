@@ -2,11 +2,13 @@
 {% block title %} Compare: {{gamename}} {% endblock %}
 {% block content %}
 
+
+  <div class = "containerKYLE"><p> <strong> Face off against {{opp.username}} </strong></p></div>
+
   <div class="containerKYLE">
     <div class="gameimage"> 
       <img src={{image}} alt="Help">
     </div>
-    <div><p> <strong> Face off against {{opp.username}} </strong></p></div>
   </div>
   
   <br>
@@ -14,11 +16,13 @@
   <div class="containerKYLE">
     <img src = {{YOU.avatar}} alt = "Your Profile Icon">
     <p> You have <strong>{{YA}}</strong>completed achievements in {{gamename}} </p>
-    <p> Your rarest achievement is {{YRareAch}} with a rarity of {{YRareAchRarity}} </p>
+    <p> Your rarest achievement is <strong> {{YRareAchievement}} </strong> with a rarity of {{YRareAchievementRarity}} </p>
 
+  </div>
+  <div class = "containerKYLE">
     <img src = {{opp.avatar}} alt = "Opponent's Profile Icon">
     <p> {{opp.username}} has <strong>{{OA}}</strong> completed achievements in {{gamename}} </p>
-    <p> {{opp.username}}'s rarest achievement is {{ORareAch}} with a rarity of {{ORareAchRarity}} </p>
+    <p> {{opp.username}}'s rarest achievement is <strong> {{ORareAchievement}} </strong> with a rarity of {{ORareAchievementRarity}} </p>
   </div>
 
 {% endblock %}
