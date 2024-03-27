@@ -123,14 +123,6 @@ def compare(gameID, oppid):
     #do check for YRareAchievement within html
     return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements, YRareAchievement = YRareAch, ORareAchievement = ORareAch, YRareAchievementRarity = yourAchievements, ORareAchievementRarity = oppAchievements)
 
-
-@app.route("/user")
-def user():
-    return render_template("user.html", YOU=YOU)
-
-
-
-
 if __name__ == '__main__':
     # print("Please enter your steam id")
     # id = JordanSteamID
