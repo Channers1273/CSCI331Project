@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}User Page{% endblock %}
+{% block content %}
+
+<style>
+    .button {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: large;
+    }
+</style>
+<h2> Logged in as: {{ YOU.username }}</h2>
+<br>
+<button class="button" onclick="window.location.href='/login';"> Logout </button>
+
+
+{% endblock %}
