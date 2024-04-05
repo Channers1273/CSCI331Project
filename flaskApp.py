@@ -79,7 +79,6 @@ def compare(gameID, oppid):
             yourAchievements[A] = yourAchievementData[A]
 
     oppAchievementData = getAchievementInfo(opp.steamID, gameID)
-    # oppAchievements = { k:v for (k,v) in oppAchievementData if oppAchievementData[k]['obtained'] == 1}
 
     oppAchievements = {}
     for A in oppAchievementData:
@@ -89,38 +88,11 @@ def compare(gameID, oppid):
     YNumAchievements = len(yourAchievements)
     ONumAchievements = len(oppAchievements)
 
-    # print('*' * 7)
-    # print(yourAchievements) 
-    # print('*' * 7)
-    # print(oppAchievements) 
-
-    '''
-    for A in yourAchievements:
-        if yourAchievements[A]['obtained'] == 1:
-            YNumAchievements += 1
-
-    for A in oppAchievements:
-        if oppAchievements[A]['obtained'] == 1:
-            ONumAchievements += 1
-    '''
-
     YRarestAchievement = getRarestAchievement(yourAchievements)
     ORarestAchievement = getRarestAchievement(oppAchievements)
 
     YRareAch = list(YRarestAchievement.keys())
-    print(YRareAch)
     ORareAch = list(ORarestAchievement.keys())
-    print(ORareAch)
-    # YRareAchRarity = YRarestAchievement[] 
-    # ORareAchRarity = ORarestAchievement[]
-
-
-
-
-    #old
-    #return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements, YRareAchievement = YRareAch[0], ORareAchievement = ORareAch[0], YRareAchievementRarity = yourAchievements[YRareAch[0]]['rarity'], ORareAchievementRarity = oppAchievements[ORareAch[0]]['rarity'])
-
-    #do check for YRareAchievement within html
     return render_template("gameComparison.html", YOU = YOU, opp = opp, gamename = gamename, image = imgLin, YA = YNumAchievements, OA = ONumAchievements, YRareAchievement = YRareAch, ORareAchievement = ORareAch, YRareAchievementRarity = yourAchievements, ORareAchievementRarity = oppAchievements)
 
 

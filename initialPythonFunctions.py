@@ -16,7 +16,7 @@ englishID = "en"
 appIDTheFinals = 2073850
 appIDGodOfWar = 1593500
 appIDPalworld = 1623730
-appIDLethalCompany = 1966720
+appIDLethalCompany = 1966720 
 appIDBlasphemous = 774361
 appIDTheBindingOfIsaacRebirth = 250900
 appIDWeWereHere = 582500
@@ -159,7 +159,6 @@ class friendUser:
         
 
 
-
 def getAchievementInfo(steamID: str, appid: int):
     achievementDict = {}
     url = f"https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid={appid}&key={KEY}&steamid={steamID}&l=en"
@@ -225,14 +224,9 @@ def getAppImage(appid: int):
 def getRarestAchievement(Achievements: dict) -> dict:
     k = ''
     rarest = 101 
-   
-    print('*' * 7)
-    print(Achievements)
 
     for A in Achievements:
-        # print(key, value)
         if Achievements[A]['rarity'] < rarest:
-            print(Achievements[A]['rarity'], "is less than", rarest)
             rarest = Achievements[A]['rarity']
             k = A
     # return rarest

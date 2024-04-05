@@ -131,16 +131,19 @@ a>.style1 {
   margin: auto;
   padding: 20px;
   width: 50%;
-  border: solid 1px black;
-
+  border: solid 2px #141fbc;
+  border-radius: 10px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.usercompinfo {
-    
+.flex-itemKYLE{
+  margin: 10px;
+  border: solid 1px #141fbc;
+  padding: 10px;
+  color: black;
 }
 
 .gameimage {
