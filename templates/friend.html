@@ -17,6 +17,7 @@
         {% set image = getAppImage(data['appid']) %}
         <img src="{{ image }}" alt="{{name}} Image" style="width:50%">
         <p>{{name}}</p>
+        <p>ID: {{data['appid']}}</p>
         <p>Playtime (Forever): {{ "{:.2f}".format(data['playtime_forever']) }} hours</p>
         <p>Playtime (2 Weeks): {{ "{:.2f}".format(data['playtime_2weeks']) }} hours</p>
         <br><br>

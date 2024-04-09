@@ -37,6 +37,7 @@ class SteamUser:
         self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
                                                         # sized dict of friend name/id pairs just like friendsList
         self.DDGames = self.getDropdownGames()
+        self.ownedGames = self.getOwnedGames()
 
     def getUsername(self):
         user = steam.users.get_user_details(self.steamID)
@@ -77,7 +78,12 @@ class SteamUser:
 
     def getOwnedGames(self):
         apiOwnedGames = steam.users.get_owned_games(self.steamID)
-        print(apiOwnedGames)
+        games = {}
+        if 'games' in apiOwnedGames:
+            for i, game in enumerate(apiOwnedGames['games']):
+                name = game['name']
+                games[name] = {"appID": game['appid'], 'playtime_forever': float(game['playtime_forever']/60)}
+        return games
 
     def getUserSteamLevel(self):
         steamLevel = steam.users.get_user_steam_level(self.steamID)

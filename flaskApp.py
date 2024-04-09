@@ -32,7 +32,15 @@ def friend(friendID):
 
 @app.route("/game/name=<gameName>ID=<gameID>")
 def game(gameID, gameName):
-    return render_template("game.html", gameName=gameName, gameID=gameID, getAppImage=getAppImage, YOU=YOU)
+    if gameName in YOU.recentGames.keys():
+        return render_template("game.html", gameName=gameName, gameID=gameID, getAppImage=getAppImage, YOU=YOU)
+    else:
+        return render_template("altGame.html", gameName=gameName, gameID=gameID, getAppImage=getAppImage, YOU=YOU)
+
+
+@app.route("/gameList")
+def gameList():
+    return render_template("gameList.html", YOU=YOU)
 
 
 @app.route("/login", methods=["POST", "GET"])
