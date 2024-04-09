@@ -8,7 +8,7 @@
     <br> -->
     
     {% for item, test1 in friends.items() %}
-        <a style="font-size: 20px; font-family:monospace; color: rgb(232, 12, 140);" href="{{ url_for('friend', friendID=test1) }}">{{item}}</a>
+        <a style="font-size: 20px; font-family:monospace; color: rgb(69, 233, 231);" href="{{ url_for('friend', friendID=test1) }}">{{item}}</a>
         <br>
     {% endfor %}
 {% endblock %}
