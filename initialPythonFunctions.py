@@ -152,6 +152,7 @@ class friendUser:
         self.avatar = self.userDet['player']['avatarfull']
         self.username = self.userDet['player']['personaname']
         self.recentGames = self.getRecentGames()
+        self.ownedGames = self.getOwnedGames()
 
 
     def getRecentGames(self):
@@ -164,7 +165,14 @@ class friendUser:
         return recentGames
         
 
-
+    def getOwnedGames(self):
+        apiOwnedGames = steam.users.get_owned_games(self.steamID)
+        games = {}
+        if 'games' in apiOwnedGames:
+            for i, game in enumerate(apiOwnedGames['games']):
+                name = game['name']
+                games[name] = {"appID": game['appid'], 'playtime_forever': float(game['playtime_forever']/60)}
+        return games
 
 def getAchievementInfo(steamID: str, appid: int):
     achievementDict = {}
