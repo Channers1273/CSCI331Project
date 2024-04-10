@@ -28,6 +28,7 @@ class SteamUser:
 
     def __init__(self, steamID: str):
         user = steam.users.get_user_details(steamID)
+        print(user)
         self.steamID = steamID
         self.username = user['player']['personaname']
         self.friendsList = self.getFriends()
@@ -38,6 +39,7 @@ class SteamUser:
                                                         # sized dict of friend name/id pairs just like friendsList
         self.DDGames = self.getDropdownGames()
         self.ownedGames = self.getOwnedGames()
+        self.steamLevel = self.getUserSteamLevel()
 
     def getUsername(self):
         user = steam.users.get_user_details(self.steamID)
@@ -153,6 +155,7 @@ class friendUser:
         self.username = self.userDet['player']['personaname']
         self.recentGames = self.getRecentGames()
         self.ownedGames = self.getOwnedGames()
+        self.steamLevel = self.getUserSteamLevel()
 
 
     def getRecentGames(self):
@@ -173,6 +176,10 @@ class friendUser:
                 name = game['name']
                 games[name] = {"appID": game['appid'], 'playtime_forever': float(game['playtime_forever']/60)}
         return games
+
+    def getUserSteamLevel(self):
+        steamLevel = steam.users.get_user_steam_level(self.steamID)
+        return steamLevel['player_level']
 
 def getAchievementInfo(steamID: str, appid: int):
     achievementDict = {}
@@ -253,9 +260,5 @@ def getRarestAchievement(Achievements: dict) -> dict:
     return ans
 
 if __name__ == '__main__':
-    test = {}
-    test['apple'] = {}
-    test['apple']['rarity'] = 20
-    test2 = getRarestAchievement(test)
-    print(test2)
+    thing = SteamUser(KyleSteamID);
     

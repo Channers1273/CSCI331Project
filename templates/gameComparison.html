@@ -19,6 +19,7 @@
 
   <div class="containerKYLE">
     <div class = "flex-itemKYLE"> <img src = {{YOU.avatar}} alt = "Your Profile Icon"> </div>
+    <div class = "flex-itemKYLE"><p>Steam Level {{YOU.steamLevel}}</p></div>
     <div class = "flex-itemKYLE"><p> You have <strong>{{YA}}</strong> completed achievements in {{gamename}} </p> </div>
     {% if YRareAchievement %}
     <div class = "flex-itemKYLE"><p> Your rarest achievement is <strong> {{YRareAchievement[0]}} </strong> with a rarity of {{YRareAchievementRarity[YRareAchievement[0]]['rarity']}} </p> </div>
@@ -31,6 +32,7 @@
 
   <div class = "containerKYLE">
     <div class = "flex-itemKYLE"> <img src = {{opp.avatar}} alt = "Opponent's Profile Icon"> </div>
+    <div class = "flex-itemKYLE"><p>Steam Level {{opp.steamLevel}}</p></div>
     <div class = "flex-itemKYLE"> <p> {{opp.username}} has <strong>{{OA}}</strong> completed achievements in {{gamename}} </p> </div>
     {% if ORareAchievement %}
     <div class = "flex-itemKYLE"> <p> {{opp.username}}'s rarest achievement is <strong> {{ORareAchievement[0]}} </strong> with a rarity of {{ORareAchievementRarity[ORareAchievement[0]]['rarity']}} </p> </div>
