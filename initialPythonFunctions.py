@@ -89,7 +89,7 @@ class SteamUser:
     def getUserSteamLevel(self):
         steamLevel = steam.users.get_user_steam_level(self.steamID)
         if not steamLevel:
-            return "Steam Level Not Found"
+            return "Unknown"
         else:
             return steamLevel['player_level']
 
@@ -182,7 +182,7 @@ class friendUser:
     def getUserSteamLevel(self):
         steamLevel = steam.users.get_user_steam_level(self.steamID)
         if not steamLevel:
-            return "Steam Level Not Found"
+            return "Unknown"
         else:
             return steamLevel['player_level']
 
