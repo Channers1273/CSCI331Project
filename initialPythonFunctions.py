@@ -28,7 +28,6 @@ class SteamUser:
 
     def __init__(self, steamID: str):
         user = steam.users.get_user_details(steamID)
-        print(user)
         self.steamID = steamID
         self.username = user['player']['personaname']
         self.friendsList = self.getFriends()
@@ -89,7 +88,10 @@ class SteamUser:
 
     def getUserSteamLevel(self):
         steamLevel = steam.users.get_user_steam_level(self.steamID)
-        return steamLevel['player_level']
+        if not steamLevel:
+            return "Steam Level Not Found"
+        else:
+            return steamLevel['player_level']
 
     def listAchievement(self, displayName):
         for achievement in self.achievements[displayName]:
@@ -179,7 +181,10 @@ class friendUser:
 
     def getUserSteamLevel(self):
         steamLevel = steam.users.get_user_steam_level(self.steamID)
-        return steamLevel['player_level']
+        if not steamLevel:
+            return "Steam Level Not Found"
+        else:
+            return steamLevel['player_level']
 
 def getAchievementInfo(steamID: str, appid: int):
     achievementDict = {}
@@ -260,5 +265,16 @@ def getRarestAchievement(Achievements: dict) -> dict:
     return ans
 
 if __name__ == '__main__':
-    thing = SteamUser(KyleSteamID);
+
+    L = friendUser("76561199092260377")
+    L2 = friendUser(KyleSteamID)
+    print(L.steamLevel)
+    print(L2.steamLevel)
+    # steamLevel = steam.users.get_user_steam_level("76561199092260377")
+    # steamLevel1 = steam.users.get_user_steam_level(KyleSteamID)
+    # 
+    # print(steamLevel)
+    # print(steamLevel1)
+    # friendsList = steam.users.get_user_friends_list("76561199092260377")
+    # thing = SteamUser(76561199092260377)
     
