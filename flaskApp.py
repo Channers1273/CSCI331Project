@@ -11,7 +11,6 @@ def index():
     # when YOU exists (with input), render welcome.html
     # Error handling to be done for invalid Steam ID
     if YOU:
-        # rgames = YOU.listRecentGames
         try:
             return render_template("welcome.html", YOU=YOU, name=YOU.username, getAppImage=getAppImage)
         except Exception as e:
@@ -65,9 +64,7 @@ def select():
     
     if request.method == "POST":
         game = request.form["game"]
-        # gn = getAppName(game)
         opponent = str(request.form["opp"])
-        # return redirect(url_for("compare", gameid = game, oppid = str(opponent)))
         return redirect(url_for("compare", gameID=game, oppid=opponent))
     else:
         return render_template("gameSelection.html", YOU=YOU)
@@ -112,9 +109,5 @@ def user():
 
 
 if __name__ == '__main__':
-    # print("Please enter your steam id")
-    # id = JordanSteamID
-    # YOU = SteamUser(id)
-
     # debug is set to save rerun a server when change is made
     app.run(debug=True)

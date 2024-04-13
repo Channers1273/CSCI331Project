@@ -4,8 +4,6 @@ import requests
 import json
 import random
 
-# This is a comment made by Kyle
-#This is Jordans second attempt at adding a comment
 KyleSteamID = "76561198199245639" 
 JordanSteamID = "76561198208256371"
 AlvinSteamID = "76561198419880283"
@@ -65,13 +63,8 @@ class SteamUser:
                 if i >= 5:
                     break
                 name = game['name']
-                recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
-        return recentGames
-        # original
-        # for game in apiGames['games']:
-        #     name = game['name']
-        #     recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) }
-        # return recentGames
+                recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) } 
+            return recentGames
 
     def listRecentGames(self):
         for game in self.recentGames:
@@ -108,11 +101,6 @@ class SteamUser:
             # Limit to 5 recent achievements
             recentAchievements[game_name] = dict(list(all_achievements.items())[:5])
         return recentAchievements
-
-    # Not really needed anymore
-    def getAvatar(self):
-        data = steam.users.get_user_details(self.steamID)
-        return data['player']['avatar']
     
     def getDropdownFriends(self) -> dict:
         if not self.friendsList:
@@ -186,11 +174,12 @@ class friendUser:
         else:
             return steamLevel['player_level']
 
+
+# Non-class related functions
 def getAchievementInfo(steamID: str, appid: int):
     achievementDict = {}
     url = f"https://api.steampowered.com/ISteamUserStats/GetPlayerAchievements/v0001/?appid={appid}&key={KEY}&steamid={steamID}&l=en"
     response = requests.get(url)
-    # print(apiGameAchievements)
     if response.status_code == 200:
         apiGameAchievements = response.json()
         if 'achievements' in apiGameAchievements['playerstats'].keys():
@@ -256,7 +245,6 @@ def getRarestAchievement(Achievements: dict) -> dict:
         if Achievements[A]['rarity'] < rarest:
             rarest = Achievements[A]['rarity']
             k = A
-    # return rarest
     ans = {}
 
 
@@ -265,16 +253,4 @@ def getRarestAchievement(Achievements: dict) -> dict:
     return ans
 
 if __name__ == '__main__':
-
-    L = friendUser("76561199092260377")
-    L2 = friendUser(KyleSteamID)
-    print(L.steamLevel)
-    print(L2.steamLevel)
-    # steamLevel = steam.users.get_user_steam_level("76561199092260377")
-    # steamLevel1 = steam.users.get_user_steam_level(KyleSteamID)
-    # 
-    # print(steamLevel)
-    # print(steamLevel1)
-    # friendsList = steam.users.get_user_friends_list("76561199092260377")
-    # thing = SteamUser(76561199092260377)
-    
+    pass
