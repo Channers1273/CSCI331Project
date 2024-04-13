@@ -26,23 +26,14 @@ class SteamUser:
 
     def __init__(self, steamID: str):
         user = steam.users.get_user_details(steamID)
-        print('test1')
         self.steamID = steamID
-        print('test2')
         self.username = user['player']['personaname']
-        print('test3')
         self.friendsList = self.getFriends()
-        print('test4')
         self.recentGames = self.getRecentGames()
-        print('test5')
         self.achievements = self.getRecentAchievements()
-        print('test6')
         self.avatar = user['player']['avatarfull']
-        print('test7')
-        self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
-        print('test8')                                                   # sized dict of friend name/id pairs just like friendsList
+        self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately                                                 # sized dict of friend name/id pairs just like friendsList
         self.DDGames = self.getDropdownGames()
-        print('test9')
         self.ownedGames = self.getOwnedGames()
         self.steamLevel = self.getUserSteamLevel()
 
