@@ -9,5 +9,31 @@
 <h2>Playtime</h2>
 <br>
 <h5>All time: {{ '%0.2f'|format(YOU.ownedGames[gameName]['playtime_forever']) }} hours</h5>
+<br><br>
+<hr>
+<h2>Achievements:</h2>
+<br>
+<br>
+{% for name, data in ACH.items() %}
+<div style="display:flex; flex-direction: row; justify-content: left; align-items: center;">
+    <div class = "flex-itemJORDAN">
+            <h5>{{name}}</h5>
+                <p>
+                    Rarity: {{ '%0.2f'|format(data['rarity']) }}
+                    {% if data['obtained'] %}
+                        <p style="color: rgb(52, 255, 157);">Unlocked!</p>
+                    {% else %}
+                        <p style="color:crimson;">Locked</p>
+                    {% endif %}
+                </p>
+    </div>
+    <div class = "flex-itemJORDAN">
+            <p>{{ data['description'] }}</p>
+    </div>
+</div>
+    
+<br>
+<br>
+{% endfor %}
 
 {% endblock %}

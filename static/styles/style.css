@@ -146,6 +146,13 @@ a>.style1 {
   color: black;
 }
 
+.flex-itemJORDAN{
+    margin: 5px;
+    border: solid 1px #141fbc;
+    padding: 10px;
+    color: black;
+  }
+
 .gameimage {
   margin: 0 auto;
 }

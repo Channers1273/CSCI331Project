@@ -32,10 +32,11 @@ def friend(friendID):
 
 @app.route("/game/name=<gameName>ID=<gameID>")
 def game(gameID, gameName):
+    ACH = getAchievementInfo(YOU.steamID, gameID)
     if gameName in YOU.recentGames.keys():
-        return render_template("game.html", gameName=gameName, gameID=gameID, getAppImage=getAppImage, YOU=YOU)
+        return render_template("game.html", gameName=gameName, gameID=gameID, getAppImage=getAppImage, YOU=YOU, ACH=ACH)
     else:
-        return render_template("altGame.html", gameName=gameName, gameID=gameID, getAppImage=getAppImage, YOU=YOU)
+        return render_template("altGame.html", gameName=gameName, gameID=gameID, getAppImage=getAppImage, YOU=YOU, ACH=ACH)
 
 
 @app.route("/gameList")
