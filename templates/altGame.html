@@ -19,7 +19,7 @@
     <div class = "flex-itemJORDAN">
             <h5>{{name}}</h5>
                 <p>
-                    Rarity: {{ '%0.2f'|format(data['rarity']) }}
+                    Rarity: {{ '%0.2f'|format(data['rarity']) }}%
                     {% if data['obtained'] %}
                         <p style="color: rgb(52, 255, 157);">Unlocked!</p>
                     {% else %}
