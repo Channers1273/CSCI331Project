@@ -11,17 +11,18 @@
     <div class="recent-section">
         <h3>Recent Games</h3>
         <!-- Recent games API -->
-        {% for k, v in YOU.recentGames.items() %}
-        <div>
-            {% set app_image_url = getAppImage(v['appid']) %}
-            <img src="{{ app_image_url }}" alt="{{ k }} Image">
-            <p>Game Name: {{ k }}</p>
-            <p>Playtime (Forever): {{ "{:.2f}".format(v['playtime_forever']) }} hours</p>
-            <p>Playtime (2 Weeks): {{ "{:.2f}".format(v['playtime_2weeks']) }} hours</p>
-        </div>
-        <hr>
-        {% endfor %}
-        {% if not YOU.recentGames %}
+        {% if YOU.recentGames %}
+            {% for k, v in YOU.recentGames.items() %}
+            <div>
+                {% set app_image_url = getAppImage(v['appid']) %}
+                <img src="{{ app_image_url }}" alt="{{ k }} Image">
+                <p>Game Name: {{ k }}</p>
+                <p>Playtime (Forever): {{ "{:.2f}".format(v['playtime_forever']) }} hours</p>
+                <p>Playtime (2 Weeks): {{ "{:.2f}".format(v['playtime_2weeks']) }} hours</p>
+            </div>
+            <hr>
+            {% endfor %}
+        {% else %}
             <div>
                 <p> Looks like you don't have any recently played games.</p>
                 <p> Any games played in the last 2 weeks will show up here.</p>
@@ -32,18 +33,19 @@
 
     <div class="recent-section">
         <h3>Recent Achievements</h3>
-        {% for k, achievements in YOU.achievements.items() %}
-        <h4>{{ k }}</h4>
-        <ul>
-            {% for achievement_name, achievement_info in achievements.items() %}
-            <li>{{ achievement_name }} - Rarity: {{ achievement_info['rarity'] }}%</li>
+        {% if YOU.achievements %}
+            {% for k, achievements in YOU.achievements.items() %}
+            <h4>{{ k }}</h4>
+            <ul>
+                {% for achievement_name, achievement_info in achievements.items() %}
+                <li>{{ achievement_name }} - Rarity: {{ achievement_info['rarity'] }}%</li>
+                {% endfor %}
+            </ul>
             {% endfor %}
-        </ul>
-        {% endfor %}
-        {% if not YOU.achievements %}
-        <div>
-            <p> Looks like you don't have any recent achievements.</p>
-        </div>
+        {% else %}
+            <div>
+                <p> Looks like you don't have any recent achievements.</p>
+            </div>
         {% endif %}
     </div>
 

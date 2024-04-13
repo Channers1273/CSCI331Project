@@ -26,15 +26,23 @@ class SteamUser:
 
     def __init__(self, steamID: str):
         user = steam.users.get_user_details(steamID)
+        print('test1')
         self.steamID = steamID
+        print('test2')
         self.username = user['player']['personaname']
+        print('test3')
         self.friendsList = self.getFriends()
+        print('test4')
         self.recentGames = self.getRecentGames()
+        print('test5')
         self.achievements = self.getRecentAchievements()
+        print('test6')
         self.avatar = user['player']['avatarfull']
+        print('test7')
         self.DDFriends = self.getDropdownFriends()      # should do the work of making an appropriately
-                                                        # sized dict of friend name/id pairs just like friendsList
+        print('test8')                                                   # sized dict of friend name/id pairs just like friendsList
         self.DDGames = self.getDropdownGames()
+        print('test9')
         self.ownedGames = self.getOwnedGames()
         self.steamLevel = self.getUserSteamLevel()
 
@@ -94,12 +102,13 @@ class SteamUser:
         recentAchievements = {}
         # Limit to 1 recent games to save loading time (2 sometimes timeout...)
         # Comment out the for loop to enhance performance
-        for game_name, game_info in list(self.recentGames.items())[:1]:
-            appid = game_info['appid']
-            # Fetch all recent achievements for the game before calling api
-            all_achievements = getAchievementInfo(self.steamID, appid)
-            # Limit to 5 recent achievements
-            recentAchievements[game_name] = dict(list(all_achievements.items())[:5])
+        if self.recentGames:
+            for game_name, game_info in list(self.recentGames.items())[:1]:
+                appid = game_info['appid']
+                # Fetch all recent achievements for the game before calling api
+                all_achievements = getAchievementInfo(self.steamID, appid)
+                # Limit to 5 recent achievements
+                recentAchievements[game_name] = dict(list(all_achievements.items())[:5])
         return recentAchievements
     
     def getDropdownFriends(self) -> dict:

@@ -13,6 +13,7 @@ def index():
     if YOU:
         try:
             return render_template("welcome.html", YOU=YOU, name=YOU.username, getAppImage=getAppImage)
+            print('hello')
         except Exception as e:
             print("Error in index():", e)
             return redirect(url_for("login"))
