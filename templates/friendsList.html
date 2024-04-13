@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 {% block title %}{{name}}'s Friend List{% endblock %}
 {% block content %}
-    <!-- <a href="/">
-        <h1 style="font-size: 20px; font-family:monospace; color: rgb(9, 198, 240); font-weight: normal;">Welcome Page</h1>
-    </a>
-    <br>
-    <br> -->
+<h3>Friends List</h3>
+<p>Click to see more info!</p>
+<hr>
+<br>
     
     {% for item, test1 in friends.items() %}
         <a style="font-size: 20px; font-family:monospace; color: rgb(69, 233, 231);" href="{{ url_for('friend', friendID=test1) }}">{{item}}</a>
