@@ -188,7 +188,8 @@ def getAchievementInfo(steamID: str, appid: int):
                 displayName = achievement['name']
                 achievementRarity = getAchievementRarity(appid, apiname)
                 obtainStatus = achievement['achieved']
-                achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus}
+                description = achievement['description']
+                achievementDict[displayName] = {'apiname': apiname, 'rarity': achievementRarity, 'obtained': obtainStatus, 'description': description}
     return achievementDict
 
 def getAchievementTitle(apikey, appid, apiname) -> str:

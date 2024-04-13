@@ -9,7 +9,7 @@
         background-color: red;
         color: white;
         border: none;
-        padding: 8px 12px;
+        padding: 6px 10px;
         font-size: large;
     }
 </style>
@@ -31,17 +31,18 @@
     {% for name, data in FRIEND.recentGames.items() %}
         {% set image = getAppImage(data['appid']) %}
         {% set gameID = data['appid'] %}
-        <img src="{{ image }}" alt="{{name}} Image" style="width:50%">
+        <img src="{{ image }}" alt="{{name}} Image">
         <p>{{name}}</p>
         <p>ID: {{data['appid']}}</p>
         <p>Playtime (Forever): {{ "{:.2f}".format(data['playtime_forever']) }} hours</p>
         <p>Playtime (2 Weeks): {{ "{:.2f}".format(data['playtime_2weeks']) }} hours</p>
         <button class="button" onclick="window.location.href='/compare/{{gameID}}/{{FRIEND.steamID}}';"> Battle! </button>
-        <br><br>
+        <br><br><br>
     {% endfor %}
 
     <br><br><br><br><br><hr>
     <h2>{{FRIEND.username}}'s Owned Games</h2>
+    <p>Click to battle!</p>
 
 
     {% for name, id in FRIEND.ownedGames.items() %}

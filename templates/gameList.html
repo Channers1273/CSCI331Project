@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Game List{% endblock %}
 {% block content %}
+<h3>Owned Games</h3>
+<p>Click to see more info!</p>
+<hr>
+<br>
 
     {% for name, game in YOU.ownedGames.items() %}
         <a style="font-size: 20px; font-family:monospace; color: rgb(69, 233, 231);" href="{{ url_for('game', gameName=name, gameID=game['appID']) }}">{{name}}</a>
