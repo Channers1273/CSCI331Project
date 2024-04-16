@@ -1,5 +1,5 @@
 bs4
-python-steam-api
+python-steam-api==1.2.2
 requests
 Flask
 python-dotenv
