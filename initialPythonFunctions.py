@@ -63,7 +63,7 @@ class SteamUser:
                     break
                 name = game['name']
                 recentGames[name] = {'appid': game['appid'], 'playtime_forever': float(game['playtime_forever']/60), 'playtime_2weeks': float(game['playtime_2weeks']/60) } 
-            return recentGames
+        return recentGames
 
     def listRecentGames(self):
         for game in self.recentGames:
